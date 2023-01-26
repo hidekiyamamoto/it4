@@ -39,6 +39,8 @@ var Item=function(area,opts,_ui){this.elm=elm;this.ui=_ui;this.opts=opts||{};thi
 var Area=function(opts){this.opts=opts||{};this.init();};Area.prototype={
 	init:function(){
 		if(this.oo.draggable){this.elm.addEventListener('dragover',function(ev){_this._dragover(ev)});this.elm.addEventListener('drop',function(ev){_this._drop(ev)});}
+		//writecss
+		
 	},
 	findItem:function(elm){
 		

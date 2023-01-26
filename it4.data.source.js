@@ -158,7 +158,7 @@ var Source=function(name,data,oo){this.D=data;this.name=name;this.oo=oo;
 				else if(j_adapter[this.tuplets[k]]||j_adapter[this.tuplets[k]]==0){xx.push((j_row[j_adapter[this.tuplets[k]]])||'');}
 		}	}return xx.join('-');},
 	OPS:{formula:function(){return null},
-		js:function(db_row,j_row,out_r_idx,j_adapter,C,c_idx){let v=j_row[j_adapter[C.source_col||C.name.replace(/ /g,'')]];
+		js:function(db_row,j_row,out_r_idx,j_adapter,C,c_idx){console.log(C);let v=j_row[j_adapter[C.source_col||C.name.replace(/ /g,'')]];
 			if(v){this.O[out_r_idx][c_idx]=v}},
 		db:function(db_row,j_row,out_r_idx,j_adapter,C,c_idx){let v=db_row[C.source_col||C.name.replace(/ /g,'')];
 			if(v){this.O[out_r_idx][c_idx]=v}},

@@ -21,10 +21,10 @@ var GraphTableBase=function(opts,source,target){GraphBase.call(this,'TableBase',
 				it4.ins(tl,'td',false,FO[r][h]);
 	}	}	},
 	update:function(){
-		redraw();
+		this.redraw();
 	},
 	refit:function(){
-		redraw();
+		this.redraw();
 	},
 	destroy:function(){
 		GraphBase.prototype.destroy.call(this);
