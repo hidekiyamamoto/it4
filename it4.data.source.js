@@ -82,6 +82,7 @@ var Source=function(name,data,oo){this.D=data;this.name=name;this.oo=oo;
 		else{console.log('@@@@@@@@@@@@@@ REGROUP SKIPPED BECAUSE SAME @@@@@@@@@@@@@@@');return false}
 	},
 	_regroup:function(){
+			O_formatted=false;
 			let COLS=this.oo.def.cols;
 			let j_cols_that_must_be_prefiltered=[];let j_cols_that_must_be_prefiltered_values=[];
 			let db_cols_that_must_be_prefiltered=[];let db_cols_that_must_be_prefiltered_values=[];
@@ -156,8 +157,9 @@ var Source=function(name,data,oo){this.D=data;this.name=name;this.oo=oo;
 			this.O.unshift([]);for(c=0;c<COLS.length;c++){this.O[0].push(COLS[c].name)}
 			//Clean grouped columns (they make no sense)
 			let col=null;for(r=0;r<this.O.length;r++){
-				for(col in this.G){if(this.G[col]=='ungrouped'){this.O[r][this.out_adapter[col.replace(/ /g,'').toLowerCase()]]='#--hide';}}
-				this.O[r]=this.O[r].filter(function(value,index,arr){return value != '#--hide';});}
+				for(col in this.G){if(this.G[col]=='ungrouped'){this.O[r][this.out_adapter[col]]='#--hide';}}
+				this.O[r]=this.O[r].filter(function(value,index,arr){return value != '#--hide';});
+			}
 			this.OH=this.O.shift();
 			return true;
 	},
