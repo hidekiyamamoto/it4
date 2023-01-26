@@ -68,12 +68,16 @@ var Source=function(name,data,oo){this.D=data;this.name=name;this.oo=oo;
 					}
 				if(m){return false;}
 		}}}return true;},
-	is_same_GorF:function(G1,G2){for(let g in G2){if(G1[g]===undefined){return false}if((G1[g]===false)&&(G2[g]===false)){continue}if(G1[g]!=G2[g]){return false}}return true;},
+	is_same_GorF:function(G1,G2){
+		for(let g in G2){if(G1[g]===undefined){return false}if((G1[g]!=G2[g])){return false}}
+		for(let g in G1){if(G2[g]===undefined){return false}if((G1[g]!=G2[g])){return false}}
+		return true;
+	},
 	regroup:function(G,F,force){
 		let doregroup=force;
 		if(!doregroup){if(this.O.length==0){doregroup=true}}
-		if(G){if(!this.is_same_GorF(G,this.G)){doregroup=true;this.G=G;}}
-		if(F){if(!this.is_same_GorF(F,this.F)){doregroup=true;this.F=F;}}
+		if(G){if(!this.is_same_GorF(this.G,G)){doregroup=true;this.G=it4.extend(this.G,G);}}
+		if(F){if(!this.is_same_GorF(this.F,F)){doregroup=true;this.F=it4.extend(this.F,F);}}
 		if(doregroup){this._regroup();return true;}
 		else{console.log('@@@@@@@@@@@@@@ REGROUP SKIPPED BECAUSE SAME @@@@@@@@@@@@@@@');return false}
 	},
