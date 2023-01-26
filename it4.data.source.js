@@ -111,10 +111,13 @@ var Source=function(name,data,oo){this.D=data;this.name=name;this.oo=oo;
 							//Fill columns with op or fn
 							for(c=0;c<COLS.length;c++){
 								// this.OPS[COLS[c].op].call(this,db_row,j_row,this.OUTIDX[out_ridx],db_row.j_adapter,COLS[c],c,this.G,COLS[c].field1,COLS[c].field2);
-								if(this.OPS[COLS[c].op]){this.OPS[COLS[c].op].call(this,db_row,j_row,this.OUTIDX[out_ridx],db_row.j_adapter,COLS[c],c,this.G);}
+								     if(this.OPS[COLS[c].op]){this.OPS[COLS[c].op].call(this,db_row,j_row,this.OUTIDX[out_ridx],db_row.j_adapter,COLS[c],c,this.G);}
 								else if(this.OPS[COLS[c].type]){this.OPS[COLS[c].type].call(this,db_row,j_row,this.OUTIDX[out_ridx],db_row.j_adapter,COLS[c],c,this.G);}
 								else if(this.oo.custom_fns[COLS[c].type]){this.oo.custom_fns[COLS[c].type].call(this,db_row,j_row,this.OUTIDX[out_ridx],db_row.j_adapter,COLS[c],c,this.G);}
 								else{console.log('Pickup function not found '+COLS[c].name);}
+								if(this.FIX[COLS[c].coltype]){
+									this.O[this.OUTIDX[out_ridx]][c]=this.FIX[COLS[c].coltype](this.O[this.OUTIDX[out_ridx]][c]);
+								}
 			}	}	}	}	}
 			let rem=[];
 			for(r=0;r<this.O.length;r++){
@@ -164,9 +167,13 @@ var Source=function(name,data,oo){this.D=data;this.name=name;this.oo=oo;
 				else if(db_row[kmin]){xx.push(db_row[kmin]);}
 				else if(j_adapter[this.tuplets[k]]||j_adapter[this.tuplets[k]]==0){xx.push((j_row[j_adapter[this.tuplets[k]]])||'');}
 		}	}return xx.join('-');},
+	FIX:{
+		timespan:function(v){if(v){v=v.split(':');let s=parseInt(v[0])*60;s=s+parseInt(v[1]);return s;}else{return 0}},
+		
+	},
 	OPS:{formula:function(){return null},
 		js:function(db_row,j_row,out_r_idx,j_adapter,C,c_idx){let v=j_row[j_adapter[C.source_col||C.name.replace(/ /g,'')]];
-			if(v){this.O[out_r_idx][c_idx]=v}},
+			if(v||v==0){this.O[out_r_idx][c_idx]=v;}else{this.O[out_r_idx][c_idx]=false}},
 		db:function(db_row,j_row,out_r_idx,j_adapter,C,c_idx){let v=db_row[C.source_col||C.name.replace(/ /g,'')];
 			if(v){this.O[out_r_idx][c_idx]=v}},
 		fn:function(db_row,j_row,out_r_idx,j_adapter,C,c_idx){
