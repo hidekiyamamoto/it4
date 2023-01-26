@@ -30,6 +30,13 @@ var Source=function(name,data,oo){this.D=data;this.name=name;this.oo=oo;
 				this.D[c]['week']=week_selector(d_date);
 				this.D[c]['day']=d_date.getFullYear()+'-'+numpad(d_date.getMonth()+1,2)+'-'+numpad(d_date.getDate(),2);
 		}	}
+		for(let i=0;i<this.D.length;i++){
+			if(!this.D[i].j_adapter){
+				//this.D[i].jdata=JSON.parse(this.D[i].jdata);
+				let jidx={};for(let c=0;c<this.D[i].jdata.columns.length;c++){
+					jidx[this.D[i].jdata.columns[c].title]=c;
+				}this.D[i].j_adapter=jidx;
+		}	}
 		let COLS=this.oo.def.cols;this.oo.def.empty=[];
 		for(let c=0;c<COLS.length;c++){
 			COL=this.oo.def.cols[c];
