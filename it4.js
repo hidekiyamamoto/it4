@@ -91,6 +91,16 @@ const all_htmlentities={/*"&":"&amp;"," ":"&nbsp;"*/
 			o=o+s+'s';
 			return o;
 		},
+		millimeters:function(num){
+			if(num>1000){let m=num/1000;return m.toLocaleString('IT-it', {minimumFractionDigits:2,maximumFractionDigits:2})+'m';}
+			else if(num>10){let c=num/10;return c.toLocaleString('IT-it',{minimumFractionDigits:2,maximumFractionDigits:2})+'cm';}
+			else{return num.toLocaleString('IT-it', {minimumFractionDigits:2,maximumFractionDigits:2})+'mm';}
+		},
+		sqmillimeters:function(num){
+			if(num>1000){let m=num/1000;return m.toLocaleString('IT-it', {minimumFractionDigits:2,maximumFractionDigits:2})+'mq';}
+			else if(num>10){let c=num/10;return c.toLocaleString('IT-it',{minimumFractionDigits:2,maximumFractionDigits:2})+'cmq';}
+			else{return num.toLocaleString('IT-it', {minimumFractionDigits:2,maximumFractionDigits:2})+'mmq';}
+		},
 		local:function(num){let s=num.toLocaleString('IT-it');let x=s.indexOf(',');if((x==s.length-2)&&(x>-1)){s=s+'0'}return s;},
 		localInt:function(num){num=Math.round(num);return num.toLocaleString('IT-it');},
 		localFloat:function(num){if(typeof num=='string'){num=parseFloat(num)}
