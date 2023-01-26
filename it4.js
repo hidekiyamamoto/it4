@@ -81,6 +81,16 @@ const all_htmlentities={/*"&":"&amp;"," ":"&nbsp;"*/
 	}	};
 	exports.render=new exports.RenderEngine('JS');
 	exports.format={
+		seconds:function(num){
+			let h=Math.floor(num/60/60);
+			let m=Math.floor((num % (60*60))/60);
+			let s=Math.floor(num % 60);
+			let o='';
+			if(h>0){o=o+h+'h'}
+			if(m>0){o=o+m+'m'}
+			o=o+s+'s';
+			return o;
+		},
 		local:function(num){let s=num.toLocaleString('IT-it');let x=s.indexOf(',');if((x==s.length-2)&&(x>-1)){s=s+'0'}return s;},
 		localInt:function(num){num=Math.round(num);return num.toLocaleString('IT-it');},
 		localFloat:function(num){if(typeof num=='string'){num=parseFloat(num)}
