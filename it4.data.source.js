@@ -36,7 +36,7 @@ var Source=function(name,data,oo){this.D=data;this.name=name;this.oo=oo;
 				let jidx={};for(let c=0;c<this.D[i].jdata.columns.length;c++){
 					jidx[this.D[i].jdata.columns[c].title]=c;
 				}this.D[i].j_adapter=jidx;
-		}	
+		}	}
 		let COLS=this.oo.def.cols;this.oo.def.empty=[];
 		for(let c=0;c<COLS.length;c++){
 			COL=this.oo.def.cols[c];
