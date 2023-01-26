@@ -76,8 +76,8 @@ var Source=function(name,data,oo){this.D=data;this.name=name;this.oo=oo;
 	regroup:function(G,F,force){
 		let doregroup=force;
 		if(!doregroup){if(this.O.length==0){doregroup=true}}
-		if(G){if(!this.is_same_GorF(this.G,G)){doregroup=true;this.G=it4.extend(this.G,G);}}
-		if(F){if(!this.is_same_GorF(this.F,F)){doregroup=true;this.F=it4.extend(this.F,F);}}
+		if(G){if(!this.is_same_GorF(this.G,G)){doregroup=true;it4.extend(this.G,G);}}
+		if(F){if(!this.is_same_GorF(this.F,F)){doregroup=true;it4.extend(this.F,F);}}
 		if(doregroup){this._regroup();return true;}
 		else{console.log('@@@@@@@@@@@@@@ REGROUP SKIPPED BECAUSE SAME @@@@@@@@@@@@@@@');return false}
 	},
@@ -100,7 +100,6 @@ var Source=function(name,data,oo){this.D=data;this.name=name;this.oo=oo;
 					if(COLS[c].op=='normal'){j_cols_that_must_be_prefiltered.push(COLS[c].name);j_cols_that_must_be_prefiltered_values.push(vv);}
 					else if(COLS[c].op=='dbnormal'){db_cols_that_must_be_prefiltered.push(COLS[c].source_col);db_cols_that_must_be_prefiltered_values.push(vv);}
 				}
-				
 			}}}
 			this.OUTIDX={};this.O=[];let out_ridx=null;this.AVG_COUNT={};
 			var db_row=null;var json_data=null;var j_row=null;
