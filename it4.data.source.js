@@ -32,7 +32,7 @@ var Source=function(name,data,oo){this.D=data;this.name=name;this.oo=oo;
 		}	}
 		for(let i=0;i<this.D.length;i++){
 			if(!this.D[i].j_adapter){
-				//this.D[i].jdata=JSON.parse(this.D[i].jdata);
+				if(typeof this.D[i].jdata=='string'){this.D[i].jdata=JSON.parse(this.D[i].jdata);}
 				let jidx={};for(let c=0;c<this.D[i].jdata.columns.length;c++){
 					jidx[this.D[i].jdata.columns[c].title]=c;
 				}this.D[i].j_adapter=jidx;
