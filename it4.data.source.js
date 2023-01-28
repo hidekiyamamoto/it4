@@ -82,7 +82,7 @@ var Source=function(name,data,oo){this.D=data;this.name=name;this.oo=oo;
 		else{console.log('@@@@@@@@@@@@@@ REGROUP SKIPPED BECAUSE SAME @@@@@@@@@@@@@@@');return false}
 	},
 	_regroup:function(){
-			O_formatted=false;
+			this.O_formatted=false;
 			let COLS=this.oo.def.cols;
 			let j_cols_that_must_be_prefiltered=[];let j_cols_that_must_be_prefiltered_values=[];
 			let db_cols_that_must_be_prefiltered=[];let db_cols_that_must_be_prefiltered_values=[];
