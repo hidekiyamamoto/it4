@@ -80,6 +80,38 @@ const all_htmlentities={/*"&":"&amp;"," ":"&nbsp;"*/
 			return [value.substring(s,e+end.length),value.substring(s+start.length,e),{s:s,e:e,ps:ps,te:te}];
 	}	};
 	exports.render=new exports.RenderEngine('JS');
+	
+	exports.compress:function(string,encoding) {
+		const byteArray = new TextEncoder().encode(string);
+		const cs = new CompressionStream(encoding);
+		const writer = cs.writable.getWriter();
+		writer.write(byteArray);writer.close();
+		return new Response(cs.readable).arrayBuffer();
+	},
+	exports.decompress:function(byteArray, encoding) {
+		const cs = new DecompressionStream(encoding);
+		const writer = cs.writable.getWriter();
+		writer.write(byteArray);writer.close();
+			return new Response(cs.readable).arrayBuffer().then(function (arrayBuffer) {
+			return new TextDecoder().decode(arrayBuffer);
+	});};
+	exports.arrayBufferToBase64:function( buffer ) {
+		var binary = '';
+		var bytes = new Uint8Array( buffer );
+		var len = bytes.byteLength;
+		for (var i = 0; i < len; i++) {
+			binary += String.fromCharCode( bytes[ i ] );
+		}
+		return window.btoa( binary );
+	};
+	exports.base64ToArrayBuffer:function(base64) {
+		var binaryString = atob(base64);
+		var bytes = new Uint8Array(binaryString.length);
+		for (var i = 0; i < binaryString.length; i++) {
+			bytes[i] = binaryString.charCodeAt(i);
+		}
+		return bytes.buffer;
+	};
 	exports.format={
 		seconds:function(num){
 			let h=Math.floor(num/60/60);
